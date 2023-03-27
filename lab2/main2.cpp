@@ -2,7 +2,6 @@
 #include <stdio.h>
 #include <pthread.h>
 
-
 #define MAXCHAR 100
 
 struct Param{
