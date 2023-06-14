@@ -95,6 +95,8 @@ int main()
             // PADRE
             close(pipePC1[1]); // close write
             close(pipePC2[1]); // close write
+            int retval = fcntl( pipePC1[0], F_SETFL, fcntl(pipePC1[0], F_GETFL) | O_NONBLOCK);
+            int retval2 = fcntl( pipePC2[0], F_SETFL, fcntl(pipePC1[0], F_GETFL) | O_NONBLOCK);
             while (1)
             {
                 //sleep(5);
