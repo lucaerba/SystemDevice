@@ -1,11 +1,6 @@
 #include <iostream>
-#include <string.h>
 #include <string>
-#include <sys/shm.h>
-#include <sys/ipc.h>
 #include <unistd.h>
-#include <signal.h>
-#include <fcntl.h>
 #define N 20
 #define WAIT_TIME_1 3
 #define WAIT_TIME_2 7
