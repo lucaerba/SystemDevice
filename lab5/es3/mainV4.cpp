@@ -4,13 +4,11 @@
 #include <sys/shm.h>
 #include <sys/ipc.h>
 #include <unistd.h>
+#include <signal.h>
 #include <fcntl.h>
-#include <cstdlib>
-#include <sys/select.h>
-
 #define N 20
 #define WAIT_TIME_1 3
-#define WAIT_TIME_2 6
+#define WAIT_TIME_2 7
 #define STR_NUM 3
 #define STR_SIZE 5
 
@@ -95,46 +93,23 @@ int main()
         }
         else {
             // PADRE
-
-            fd_set set;
-            int maxFd = std::max(pipePC1[0], pipePC2[0])+1;
-
-            FD_ZERO(&set);
-            FD_SET(pipePC1[0], &set);
-            //FD_SET(pipePC1[1], &set);
-            FD_SET(pipePC2[0], &set);
-            //FD_SET(pipePC2[1], &set);
-
-            //int maxFd2 = std::max(pipePC2[0], pipePC2[1]);
-            //int maxFdfinal = std::max(maxFd, maxFd2) + 1;
             close(pipePC1[1]); // close write
             close(pipePC2[1]); // close write
             while (1)
             {
-
-                FD_ZERO(&set);
-                FD_SET(pipePC1[0], &set);
-                //FD_SET(pipePC1[1], &set);
-                FD_SET(pipePC2[0], &set);
-                //FD_SET(pipePC2[1], &set);
-
-                if (select(maxFd, &set, NULL, NULL, NULL) == -1) {
-                    std::cerr << "Error in select" << std::endl;
-                    exit(1);
-                }
-
                 //sleep(5);
                 char *message = (char *)malloc((STR_SIZE + 1) * sizeof(char));
-
-                if (FD_ISSET(pipePC1[0], &set)) {
-                    read(pipePC1[0], message, sizeof(message));
-                    std::cout <<"padre da 1 "<<message << std::endl;
-                }
-                if (FD_ISSET(pipePC2[0], &set)) {
-                    read(pipePC2[0], message, sizeof(message));
-                    std::cout <<"padre da 2 "<<message << std::endl;
+                if(read(pipePC1[0], message, sizeof(message))>0){
+                    std::cout <<"padre "<<message << std::endl;
                 }
 
+                free(message);
+
+                 message = (char *)malloc((STR_SIZE + 1) * sizeof(char));
+
+                if(read(pipePC2[0], message, sizeof(message))>0){
+                    std::cout <<"padre "<<message << std::endl;
+                }
                 free(message);
             }
         }
