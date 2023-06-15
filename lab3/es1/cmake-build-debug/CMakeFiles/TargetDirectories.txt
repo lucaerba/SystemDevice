@@ -1,3 +1,0 @@
-C:/Users/manuel/Documents/Politecnico/SDP/SDP_labs/lab3/es1/cmake-build-debug/CMakeFiles/es1.dir
-C:/Users/manuel/Documents/Politecnico/SDP/SDP_labs/lab3/es1/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/manuel/Documents/Politecnico/SDP/SDP_labs/lab3/es1/cmake-build-debug/CMakeFiles/rebuild_cache.dir
