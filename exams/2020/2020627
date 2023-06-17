@@ -1,0 +1,15 @@
+es1
+
+int main(){
+    //file1 is open, f1 is the file descriptor
+    char buffer;
+    int n;
+
+    while(ReadFile (f1, &Buffer, 1, &n, NULL)){
+        
+    }
+
+
+}
+
+
